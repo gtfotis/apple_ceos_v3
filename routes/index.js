@@ -9,26 +9,28 @@ router.get('/:slug?', async(req, res) => {
     if (!!req.params.slug) {
         const { slug } = req.params;
         const theCEO = await ExecutiveModel.getBySlug(slug);
-        res.render('template', {
-            locals: {
-                title: 'CEO DETAILS',
-                data: theCEO
-            },
-            partials: {
-                body: 'partials/ceo-details',
-            }
-        });
+        // res.render('template', {
+        //     locals: {
+        //         title: 'CEO DETAILS',
+        //         data: theCEO
+        //     },
+        //     partials: {
+        //         body: 'partials/ceo-details',
+        //     
+        // });
+        res.json(theCEO).status(200);
     } else {
         const ExecutiveData = await ExecutiveModel.getAll();
-        res.render('template', {
-            locals: {
-                title: 'Home Page',
-                data: ExecutiveData
-            },
-            partials: {
-                body: 'partials/home',
-            },
-        });
+        // res.render('template', {
+        //     locals: {
+        //         title: 'List of Apple CEO',
+        //         data: ExecutiveData
+        //     },
+        //     partials: {
+        //         body: 'partials/home',
+        //     },
+        // });
+        res.json(ExecutiveData).status(200);
     }
 });
 
